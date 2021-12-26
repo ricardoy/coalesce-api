@@ -1,11 +1,11 @@
-import asyncio
 import argparse
+import asyncio
 import configparser
-
 from typing import Literal, Type, Union
-from nirvana.coalesce_api import RequestData, CoalesceApi
-from nirvana.coalesce_stragety import AverageCoalesce, MinCoalesce, AbstractCoalesce
+
 from nirvana.clients.request_client import async_request
+from nirvana.coalesce_api import RequestData, CoalesceApi
+from nirvana.coalesce_stragety import AverageCoalesce, MinCoalesce
 
 
 async def main(config_filename: str, coalesce_strategy: Literal["min", "avg"]) -> None:
