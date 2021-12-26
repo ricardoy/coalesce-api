@@ -15,9 +15,9 @@ class AbstractCoalesce(ABC):
         """
         for key, value in data.items():
             if not isinstance(key, str):
-                raise AttributeError(f'Key is not str: {key} type: {type(key)}')
+                raise AttributeError(f"Key is not str: {key} type: {type(key)}")
             if not isinstance(value, int) and not isinstance(value, float):
-                raise AttributeError(f'Invalid value: {value} type: {type(value)}')
+                raise AttributeError(f"Invalid value: {value} type: {type(value)}")
 
     @abstractmethod
     def get_keys(self) -> Collection[str]:
@@ -94,4 +94,4 @@ class AverageCoalesce(AbstractCoalesce):
         self.n += 1
 
     def get_coalesced(self) -> dict[str, Union[float, int]]:
-        return {key: value/self.n for key, value in self.d.items()}
+        return {key: value / self.n for key, value in self.d.items()}

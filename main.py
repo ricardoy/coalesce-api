@@ -2,13 +2,13 @@ import asyncio
 import argparse
 import configparser
 
-from typing import Literal
+from typing import Literal, Type, Union
 from nirvana.coalesce_api import RequestData, CoalesceApi
-from nirvana.coalesce_stragety import AverageCoalesce, MinCoalesce
+from nirvana.coalesce_stragety import AverageCoalesce, MinCoalesce, AbstractCoalesce
 from nirvana.clients.request_client import async_request
 
 
-async def main(config_filename: str, coalesce_strategy: Literal['min', 'avg']) -> None:
+async def main(config_filename: str, coalesce_strategy: Literal["min", "avg"]) -> None:
     config = configparser.ConfigParser()
     config.read(config_filename)
 
@@ -20,12 +20,13 @@ async def main(config_filename: str, coalesce_strategy: Literal['min', 'avg']) -
         )
         urls.append(request_data)
 
-    if coalesce_strategy == 'min':
+    coalesce_factory: Union[Type[MinCoalesce], Type[AverageCoalesce]]
+    if coalesce_strategy == "min":
         coalesce_factory = MinCoalesce
-    elif coalesce_strategy == 'avg':
+    elif coalesce_strategy == "avg":
         coalesce_factory = AverageCoalesce
     else:
-        raise AttributeError(f'Invalid coalesce strategy: {coalesce_strategy}')
+        raise AttributeError(f"Invalid coalesce strategy: {coalesce_strategy}")
 
     api = CoalesceApi(
         request=async_request, coalesce_factory=coalesce_factory, urls=urls

@@ -3,15 +3,15 @@ from nirvana.coalesce_stragety import AverageCoalesce, MinCoalesce
 
 def test_avg_coalesce_should_return_averages() -> None:
     data1 = {
-        'a': 1,
-        'b': 1,
-        'c': 1.,
+        "a": 1,
+        "b": 1,
+        "c": 1.0,
     }
 
     data2 = {
-        'a': 3.,
-        'b': 4,
-        'c': 5,
+        "a": 3.0,
+        "b": 4,
+        "c": 5,
     }
 
     avg_coalesce = AverageCoalesce()
@@ -20,29 +20,29 @@ def test_avg_coalesce_should_return_averages() -> None:
     avg_coalesce.add_data(data2)
 
     assert avg_coalesce.get_coalesced() == {
-        'a': 2.,
-        'b': 2.5,
-        'c': 3.,
+        "a": 2.0,
+        "b": 2.5,
+        "c": 3.0,
     }
 
 
 def test_min_coalesce_should_return_minimum_values() -> None:
     data1 = {
-        'a': 1.,
-        'b': 1,
-        'c': 1,
+        "a": 1.0,
+        "b": 1,
+        "c": 1,
     }
 
     data2 = {
-        'a': 3.,
-        'b': 4,
-        'c': -1,
+        "a": 3.0,
+        "b": 4,
+        "c": -1,
     }
 
     data3 = {
-        'a': 3,
-        'b': 0,
-        'c': 0.,
+        "a": 3,
+        "b": 0,
+        "c": 0.0,
     }
 
     avg_coalesce = MinCoalesce()
@@ -52,7 +52,7 @@ def test_min_coalesce_should_return_minimum_values() -> None:
     avg_coalesce.add_data(data3)
 
     assert avg_coalesce.get_coalesced() == {
-        'a': 1,
-        'b': 0,
-        'c': -1,
+        "a": 1,
+        "b": 0,
+        "c": -1,
     }

@@ -5,7 +5,6 @@ import aiohttp
 from aiohttp.web import HTTPRequestTimeout, HTTPInternalServerError
 
 
-
 @dataclass
 class Response:
     status: int
@@ -40,7 +39,9 @@ async def async_request(
     **kwargs: Any,
 ) -> Response:
     async with aiohttp.ClientSession() as session:
-        async with session.request(method=method, url=url, headers=headers, json=json) as resp:
+        async with session.request(
+            method=method, url=url, headers=headers, json=json
+        ) as resp:
             r = Response(
                 status=resp.status,
                 content=await resp.content.read(),

@@ -17,11 +17,12 @@ class RequestData:
 
 
 class CoalesceApi:
-    def __init__(self,
-                 request: RequestProtocol,
-                 coalesce_factory: Callable[[], AbstractCoalesce],
-                 urls: list[RequestData]
-                 ):
+    def __init__(
+        self,
+        request: RequestProtocol,
+        coalesce_factory: Callable[[], AbstractCoalesce],
+        urls: list[RequestData],
+    ):
         self.request = request
         self.coalesce_factory = coalesce_factory
         self.urls = urls
@@ -38,9 +39,9 @@ class CoalesceApi:
         for task, url, method in tasks:
             r = await task
             if r.status == 200:
-                j = json.loads(r.content.decode('utf-8'))
+                j = json.loads(r.content.decode("utf-8"))
                 coalesce_strategy.add_data(j)
             else:
-                logger.error(f'Error accessing {url} - method: {method}')
+                logger.error(f"Error accessing {url} - method: {method}")
 
         return coalesce_strategy.get_coalesced()
