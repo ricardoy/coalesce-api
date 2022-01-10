@@ -10,7 +10,7 @@ pip install pip-tools pip-compile-multi
 # pip-compile-multi will generate the .txt files for the requirements/.in files
 pip-compile-multi
 
-pip install -r requirements.txt
+pip install -r requirements/tests.txt
 ```
 
 
